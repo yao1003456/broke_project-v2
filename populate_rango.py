@@ -9,7 +9,7 @@ from rango.models import Category, Page
 def populate():
     python_pages = [{'title':'Official Python Tutorial',
                      'url':'http://docs.python.org/3/tutorial/'},
-                     {'title':'How to Think like a Computer Scientists',
+                     {'title':'How to Think like a Computer Scientist',
                       'url':'http://www.greenteapress.com/thinkpython/'},
                       {'title':'Learn Python in 10 Minutes',
                        'url':'http://www.korokithakis.net/tutorials/python/'}]
@@ -27,8 +27,8 @@ def populate():
                      'url':'http://flask.pocoo.org'}]
     
     cats = {'Python': {'pages': python_pages},
-            'Django':{'pages':django_pages},
-            'Other Frameworks':{'pages': other_pages}}
+            'Django': {'pages': django_pages},
+            'Other Frameworks': {'pages': other_pages}}
     
     for cat, cat_data in cats.items():
         c = add_cat(cat)
@@ -37,12 +37,13 @@ def populate():
 
     for c in Category.objects.all():
         for p in Page.objects.filter(category=c):
-            print(f'f- {c}: {p}')
+            print(f'- {c}: {p}')
 
 def add_page(cat, title, url, views=0):
     p = Page.objects.get_or_create(category=cat, title=title)[0]
-    p.url = url
-    p.views = views.save()
+    p.url=url
+    p.views=views
+    p.save
     return p
 
 def add_cat(name):
